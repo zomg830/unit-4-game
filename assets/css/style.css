@@ -1,5 +1,20 @@
-.charPic{
+.image {
+    width:18vw;
     height:auto;
-    width:10vw;
-    border: 1px solid gold;
+	display:block;
+    margin:auto;
+    padding:auto;
+}
+
+.character, #enemies, #heroes {
+	font-size: 1.0rem;
+	float: left;
+	text-align: center;
+	display:block;
+}
+
+.characterName, .characterHealth {
+	color: red;
+	width:100%;
+	margin: 0 auto;
 }
