@@ -4,7 +4,7 @@ $(document).ready(function(){
     var boba = {
         name: "BobaFett",
         fullName: "Boba Fett",
-        HP: 100,
+        HP: 150,
         AP: 10,
         image: '<img src="assets/images/boba-fett.jpg" class="image">'
     };
@@ -12,24 +12,24 @@ $(document).ready(function(){
     var ig88 = {
         name: "IG88",
         fullName: "IG-88",
-        HP: 200,
-        AP: 20,
+        HP: 145,
+        AP: 15,
         image: '<img src="assets/images/ig88.jpg" class="image">'
     };
 
     var kylo = {
         name: "KyloRen",
         fullName: "Kylo Ren",
-        HP: 300,
-        AP: 30,
+        HP: 148,
+        AP: 12,
         image: '<img src="assets/images/kylo-ren.jpg" class="image">'
     };
 
     var luke = {
         name: "LukeSkywalker",
         fullName: "Luke Skywalker",
-        HP: 400,
-        AP: 40,
+        HP: 140,
+        AP: 20,
         image: '<img src="assets/images/luke-skywalker.jpg" class="image">'
     };
 
@@ -59,7 +59,7 @@ $(document).ready(function(){
                 var $char = $('<div id='+arr[i].name+'>');
                 $char.append('<div class="characterName">'+arr[i].fullName);
                 $char.append(arr[i].image);
-				$char.append('<div class="characterHealth">HP: '+arr[i].HP);
+				$char.append('<div class="characterHealth text-center">HP: '+arr[i].HP);
 				$char.attr('data_nickName', arr[i].name);
 				$char.attr("data_name", arr[i].fullName);
 				$char.attr('data_attack', arr[i].AP);
@@ -80,7 +80,7 @@ $(document).ready(function(){
                 var $char = $('<div id='+arr[i].name+'>');
                 $char.append('<div class="characterName">'+arr[i].fullName);
                 $char.append(arr[i].image);
-                $char.append('<div class="characterHealth">'+arr[i].HP);
+                $char.append('<div class="characterHealth text-center">HP: '+arr[i].HP);
                 $char.attr('data_nickName', arr[i].name);
                 $char.attr("data_name", arr[i].fullName);
                 $char.attr('data_attack', arr[i].AP);
@@ -105,7 +105,7 @@ $(document).ready(function(){
 			$('#heroes').append('<div class="title">Your Character</div>')
 
 			$yourChar = $(this);
-			$yourChar.addClass('yourCharacter');
+			$yourChar.addClass('yourHero');
 			$yourChar.removeClass('col-md-3 character');
 
 			yourHP = parseInt($yourChar.attr('data_health'));
@@ -171,8 +171,10 @@ $(document).ready(function(){
     function battle() {
 			combAP += yourAP;
 			enemyHP = enemyHP - combAP;
-			yourHP = yourHP - enemyAP;
-            $('.currentEnemy > .characterHealth').html(enemyHP);
+            yourHP = yourHP - enemyAP;
+            console.log("Your HP: " + yourHP);
+            $('.currentEnemy > .characterHealth').html('Enemy HP: ' + enemyHP);
+            $('.yourHero > .characterHealth').html('Your HP: ' + yourHP);
 			if (enemyHP <= 0 && yourHP > 0) {
 				enemyChosen = false;
 				yourHP = yourHP - enemyAP;
