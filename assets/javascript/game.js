@@ -162,7 +162,7 @@ $(document).ready(function(){
                 if (enemyChosen) {
                     battle();
                 } else {
-                    alert('YOU NEED TO PICK AN OPPONENT');
+                    alert('Please select an opponent');
                 }
             });
         });
