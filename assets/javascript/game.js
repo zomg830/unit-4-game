@@ -4,8 +4,8 @@ $(document).ready(function(){
     var boba = {
         name: "BobaFett",
         fullName: "Boba Fett",
-        HP: 150,
-        AP: 10,
+        HP: 165,
+        AP: 14,
         image: '<img src="assets/images/boba-fett.jpg" class="image">'
     };
 
@@ -13,7 +13,7 @@ $(document).ready(function(){
         name: "IG88",
         fullName: "IG-88",
         HP: 145,
-        AP: 15,
+        AP: 19,
         image: '<img src="assets/images/ig88.jpg" class="image">'
     };
 
@@ -21,7 +21,7 @@ $(document).ready(function(){
         name: "KyloRen",
         fullName: "Kylo Ren",
         HP: 148,
-        AP: 12,
+        AP: 17,
         image: '<img src="assets/images/kylo-ren.jpg" class="image">'
     };
 
@@ -29,7 +29,7 @@ $(document).ready(function(){
         name: "LukeSkywalker",
         fullName: "Luke Skywalker",
         HP: 140,
-        AP: 20,
+        AP: 21,
         image: '<img src="assets/images/luke-skywalker.jpg" class="image">'
     };
 
@@ -56,8 +56,8 @@ $(document).ready(function(){
     function initializeChars(arr){
         if (arr.length === 4) {
             for (var i = 0; i < arr.length; i++){
-                var $char = $('<div id='+arr[i].name+'>');
-                $char.append('<div class="characterName">'+arr[i].fullName);
+                var $char = $('<div id='+arr[i].name+' class="col-4">');
+                $char.append('<div class="characterName text-center">'+arr[i].fullName);
                 $char.append(arr[i].image);
 				$char.append('<div class="characterHealth text-center">HP: '+arr[i].HP);
 				$char.attr('data_nickName', arr[i].name);
@@ -78,7 +78,7 @@ $(document).ready(function(){
             $('#enemies').append('<div class="title">Remaining Enemies</div>');
             for (var i = 0; i < arr.length; i++){
                 var $char = $('<div id='+arr[i].name+'>');
-                $char.append('<div class="characterName">'+arr[i].fullName);
+                $char.append('<div class="characterName text-center">'+arr[i].fullName);
                 $char.append(arr[i].image);
                 $char.append('<div class="characterHealth text-center">HP: '+arr[i].HP);
                 $char.attr('data_nickName', arr[i].name);
@@ -142,6 +142,7 @@ $(document).ready(function(){
 
             $('#currentEnemy').append($currentEnemy);
             enemyChosen = true;
+            console.log("enemyAP choose: " + enemyAP);
 
 
             var indexRemove = characters.indexOf($currentEnemy.attr('data_nickName'));
@@ -161,6 +162,8 @@ $(document).ready(function(){
             $('#fight').on('click', function() {
                 if (enemyChosen) {
                     battle();
+                    var audio = new Audio('assets/sounds/fire.mp3');
+                    audio.play();
                 } else {
                     alert('Please select an opponent');
                 }
@@ -169,15 +172,18 @@ $(document).ready(function(){
     };
 
     function battle() {
-			combAP += yourAP;
-			enemyHP = enemyHP - combAP;
+            combAP += yourAP;
+            console.log('combAP: ' + combAP);
+            enemyHP = enemyHP - combAP;
+            console.log('enemyHP: ' + enemyHP);
             yourHP = yourHP - enemyAP;
+            console.log('enemyAP: ' + enemyAP);
             console.log("Your HP: " + yourHP);
             $('.currentEnemy > .characterHealth').html('Enemy HP: ' + enemyHP);
             $('.yourHero > .characterHealth').html('Your HP: ' + yourHP);
 			if (enemyHP <= 0 && yourHP > 0) {
 				enemyChosen = false;
-				yourHP = yourHP - enemyAP;
+				// yourHP = yourHP - enemyAP;
 				$('#currentEnemy').empty();
 				if (characters.length === 0) {
 					alert("You Won!");
